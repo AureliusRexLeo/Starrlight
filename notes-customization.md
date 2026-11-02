@@ -20,7 +20,9 @@ Then making sure the home network stayed secure and fast. Local AI was already s
 
 Everything was originally going to live on one box. The hardware requirements kept climbing, so the roles split. Storage, media playback, networking, AI, and security each got their own direction.
 
-I’ve been building and tinkering since my teens—about sixteen years of putting machines together. Networking was always something I wanted to learn properly but never had a concrete reason until the lab needed it. An injury gave me the time to sit down and research the whole thing. Three months of reading, comparing, and planning got it to the point documented here.
+I’ve been building and tinkering since my teens—about 14 years of putting machines together and even longer tinkering. Networking was always something I wanted to learn properly but never had a concrete reason until the lab needed it.
+
+An injury gave me the time to sit down and research the whole thing. Three months of reading, comparing, and planning got it to the point documented here.
 
 While the lab comes together I’m also looking at certifications if the budget allows. People have told me since high school that IT work would fit.
 
@@ -31,3 +33,5 @@ The device pages, parts list, and budget track the actual hardware and decisions
 
 
 ##
+
+END

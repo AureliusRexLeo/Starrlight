@@ -1,15 +1,26 @@
 # Parts
+Last updated: 2026-10-30
 
-| Part                        | Now              | Going to       | Notes                                      |
-|-----------------------------|------------------|----------------|--------------------------------------------|
-| RX 6650 XT                  | friend           | Hoshiryū       | Cheap holdover                             |
-| GTX 1080 WindForce OC       | Hoshiryū         | Warspite       | After 6650 XT is in                        |
-| FX-6300 + M5A97 R2.0        | spare            | Temporary NAS  | New cooler + PSU; 120 GB SSD dying; backup |
-| SN850X 1 TB                 | PS5              | LyonHeart      | OBS / DaVinci scratch; health check first  |
-| 2 TB HDD                    | LyonHeart        | TBD            | May stay as backup or move to temp NAS     |
-| Patriot Viper 16 GB DDR5    | Hoshiryū         | stays          | Moved from LyonHeart                       |
-| Corsair RM750e 750W         | —                | LyonHeart      | Target PSU upgrade (ATX 3.1)               |
-| UHD external burner         | —                | Warspite       | Archival / ripping                         |
-| UHD internal (optional)     | —                | Warspite       | Only if case has a 5.25" bay               |
-| Media PC bundle             | —                | Warspite       | 5500-class or low X3D                      |
-| 120 GB SATA                 | spare            | nowhere        | ~30% life, copy only                       |
+| Part | Current location | Destination | Notes |
+|---------------------------------|-----------|-----------|---------------------------------------|
+| PowerColor Hellhound RX 6650 XT | Hoshiryū  | (interim) | Installed Oct 27                      |
+| Gigabyte GTX 1080 WindForce OC  | Free      | Warspite  | Out of Hoshiryū since Oct 27          |
+| R7 260X                         | Leviathan | Spare     | |
+| ASUS DVD-RW                     | Leviathan | Retire    | Needs a SATA power solution           |
+| 120 GB SSD                      | Leviathan | Retire    | ~30% life; use as flash drive/destroy |
+| 1 TB HDD                        | Leviathan | Media     | Installed                             |
+| 500 GB HDD #1                   | Leviathan | Files     | Review, wipe, SMART test              |
+| 500 GB 2.5" HDD #2              | Leviathan | Files     | Needs SATA power                      |
+| 120 GB HDD                      | ----------| Destroyed | Drilled + saltwater, Oct 25           |
+| Thermaltake Toughpower GF1 850W | To buy    | Leviathan | Personal purchase                     |
+| ASRock PRO-650G                 | To buy    | Sovereign | On the Sovereign list                 |
+| WD SN850X 1 TB                  | PS5       | Sovereign | Health check first                    |
+| AMD Ryzen 9 5900X               | To buy    | Sovereign | |
+| Corsair RM750e                  | To buy    | LyonHeart | Replaces the 2013 OCZ 750 W           |
+| OCZ Fatal1ty 750 W (2013)       | LyonHeart | Retire    | |
+| 2 TB HDD                        | LyonHeart | stays     | |
+| Patriot Viper 16 GB DDR5        | Hoshiryū  | stays     | Moved from LyonHeart                  |
+| MikroTik CRS326-24G-2S+RM       | To buy    | Kraken    | |
+| CyberPower 1000 VA UPS          | To buy    | Kraken    | Temporary lab UPS                     |
+| ARRIS SB8200 modem, Archer AX55 | To buy    | Kraken    | Modem bridge mode, AP-only            |
+| External UHD burner             | To buy    | Warspite  | |

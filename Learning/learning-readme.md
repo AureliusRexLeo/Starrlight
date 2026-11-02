@@ -1,5 +1,5 @@
-# Learning Log Readme
+# Learning
+Two logs live here:
 
-Hands-on notes from networking, servers, and lab experiments.  
-Entries are dated and high-level where security is involved.
-
+- [learning-log.md](learning-log.md): my own builds and troubleshooting. What I did, what broke, how I fixed it, and what I learned.
+- [lessons-log.md](lessons-log.md): lessons from other people, like a post or write-up that changed how I run my lab.

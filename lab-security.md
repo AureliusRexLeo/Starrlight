@@ -1,23 +1,25 @@
-# Security
-Status: planned
+# Lab Security
+This page stays high-level on purpose. It describes the approach and why, not the exact measures.
 
-## Target
-No services open to the internet.
-Remote access only through a mesh VPN.
-Disks encrypted at rest.
-Admin separate from everyday accounts.
-Backups exist off the machine.
+## Approach
+- **Nothing exposed by default.** Services are local-only. Outside access only comes after the firewall is in place, and only through an encrypted tunnel.
+- **Firewall first.** The lab's internet edge will run through a dedicated firewall, with the lab kept on its own isolated network segment.
+- **Test before trusting.** Changes go to an isolated lab segment first and always have a rollback path.
+- **Separate admin.** Day-to-day use and administration are kept apart, and admin access uses strong authentication (hardware keys are planned).
+- **Backups off the machine.** 3-2-1: primary copy on the NAS, a separate backup, and an archive.
+- **Retired drives get destroyed**, not reused or sold.
+- **Patch quickly.** A weekly security check covers every platform I actually run, and I verify alerts against official sources before acting.
+- **AI agents advise; I act.** My agents never get logins, passwords, or network details. I apply every change myself.
 
-## Access
-Daily account is not admin. Admin is used, then closed.
-Admin has no remote path unless one is deliberately opened.
-Admin requires a physical key.
-An agent can start a clean shutdown only, with a private code sequence.
-It cannot wipe or remove encryption.
+## Status
+| Area | Status |
+|-----------------------------|----------------------------|
+| Firewall                    | Planned                    |
+| Network segmentation        | Planned                    |
+| Remote access               | Planned, comparing options |
+| Hardware security keys      | Planned                    |
+| Backups                     | In progress                |
+| Patching and security watch | Active                     |
 
-## Now
-ISP router. Nothing forwarded.
-Tailscale not set up yet.
-
-## Log
-- 2026-10-18  Page created. Details stay out of the repo.
+## Lab experiments
+The lab exists to learn, so some machines (like the temporary NAS) make deliberate trade-offs that a permanent build won't. Those get fixed before anything holds real data or faces the internet.

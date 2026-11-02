@@ -6,27 +6,30 @@ Sections note the source where relevant.
 
 ## Network
 - MikroTik CRS326-24G-2S+RM: $200
-- CyberPower 1000 VA pure-sine UPS: $180
+- CyberPower 1000 VA pure-sine UPS: $180 (will upgrade as lab grows to a 1500va. this will move to protect personal pcs at that point).
 - ARRIS SB8200 modem (certified refurbished - new): $80–140
 - TP-Link Archer AX55 (Wi-Fi 6, AP mode): $75–90
-- Homelab subtotal (pre-tax, low–high): $980–1,055
-- Homelab with 8% tax (low–high): $1,058–1,139
+- Subtotal (pre-tax, low–high): $535-610
 
 ## Server (Sovereign) — full planned build
-*Not the base starting build. Goal is all-new parts. CPU planned to be sourced through a friend.
-Other components open to used/alternative where it makes sense, but new is preferred for this machine.*
 
-- CPU: AMD Ryzen 9 5900XT 3.3 GHz 16-Core — $289.99 (price is new. plan is sourced via friend)
-- CPU Cooler: Thermalright Peerless Assassin 120 SE — $31.41
-- Motherboard: ASRock B550M Steel Legend Micro ATX — $99.99
-- Memory: TEAMGROUP Elite 32 GB (2 x 16 GB) DDR4-2666 — $219.99 (will add another 32gb when cost is reasonable)
-- Storage: Kingston NV3 1 TB M.2 NVMe — $158.99 (OS/ Cache) (cheaper alternatives are available/owned)
-- Case: Phanteks Eclipse G370A ATX Mid Tower — $43.98 (design irrelevant, airflow and fit key)
-- Power Supply: ASRock PRO-650G 650 W 80+ Gold — $49.99 (considering 750w for additional headroom)
 
-**Total (PCPartPicker, 2026-10-22):** $894.34  
-Prices include shipping, taxes, and discounts when available.  
-[PCPartPicker list](https://pcpartpicker.com/list/ygRZXf)
+| Item | Part | Cost | Note
+
+|--------------|----------------------------------------------------------|---------|
+| CPU          | AMD Ryzen 9 5900X                                        | $150    | secured private sale when i'm able
+| CPU Cooler   | Thermalright Peerless Assassin 120 SE                    | $34.90  |
+| Motherboard  | ASRock B550 PG Riptide (ATX)                             | $89.99  |
+| RAM          | Silicon Power XPOWER Turbine 32 GB (2x16) DDR4-3200 CL16 | $214.97 |
+| Case         | Phanteks Eclipse G370A                                   | $43.98  |
+| Power Supply | ASRock PRO-650G 650 W 80+ Gold                           | $44.99  | may need to change to have extra cpu connector in case i upgrade
+| Storage      | WD SN850X 1 TB (moving from my PS5)                      | $0      |
+
+| **Parts subtotal** | | **$428.83 pre-tax** | | **$578.83 w/cpu** |
+
+- RAM prices keep moving, so the exact kit will likely change. Target about $210, budget range $210-250. Spare room in this budget absorbs RAM swings.
+
+Parts list: [PCPartPicker](https://pcpartpicker.com/user/Anonkingdragon/saved/yHk2bv)
 
 ## NAS (Leviathan) — target platform
 
@@ -37,8 +40,8 @@ Prices include shipping, taxes, and discounts when available.
 - Storage: Kingston NV3 500 GB M.2 NVMe — $109.00
 - Power Supply: ASRock PRO-650G or equivalent — $49.99 
   
-**New-parts total (PCPartPicker, 2026-10-22):** $436.91  
-[PCPartPicker list](https://pcpartpicker.com/list/6MJjR4)
+**New-parts total (PCPartPicker, 2026-10-22 for price refrence):** $436.91  
+
 
 ### Used alternative
 Minimum of an i3-12000-series non-F or higher (T low-power version ideal) bundled with board and RAM when possible.  

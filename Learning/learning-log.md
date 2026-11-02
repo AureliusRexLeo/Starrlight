@@ -1,9 +1,9 @@
-Learning Log
+# Learning Log
 
-#starting with the nas, the first toe dip into server territory
+## Starting with the NAS, the first toe dip into server territory
 
 **System:** ASUS M5A97 R2.0 + FX-6300  
-**Hostname:** leviathan  
+**Device name:** leviathan  
 **Purpose:** Short-term disposable file dump / NAS while permanent i3 hardware is acquired.  
 **Note:** Hardware is old and may fail; data is being organized off older drives.
 
@@ -32,7 +32,7 @@ Learning Log
 
 ### Step: Installed Ubuntu Server on the 120 GB SSD
 **Decisions:**
-- Skipped LVM encryption. Temporary box; passphrase on every boot adds friction with little benefit while the data lives on separate HDDs.
+- Made some deliberate trade-offs on this temporary box.
 - Server name set.
 
 **Result:** Ubuntu Server installed and reachable at the console. Login works.
@@ -46,15 +46,15 @@ Stopped for the evening. Machine was left powered down.
 ## 2026-10-23 — Network Bring-up & Drive Access
 
 ### Problem: Interface up but no IPv4 address
-`ip a` showed `the network interface` linked but only a link-local IPv6 address. No `inet` line.
+`ip a` showed the network interface linked but only a link-local IPv6 address. No `inet` line.
 
 **Troubleshooting:**
 - Confirmed `dhclient` was not available (Ubuntu Server uses Netplan).
-- Inspected `the installer's Netplan config`.
+- Inspected the installer's Netplan config.
 - Found the file only matched the MAC and set the interface name — `dhcp4` was missing.
 
 **Fix:**
-Added `dhcp4: true` under `the network interface`, then:
+Added `dhcp4: true` under the network interface, then:
 ```bash
 sudo netplan apply
 ```
@@ -67,6 +67,7 @@ sudo netplan apply
 ```bash
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y ntfs-3g samba
+```
 
 **Result:** System updated. Samba and NTFS tools installed.
 
@@ -75,12 +76,7 @@ Samba was not yet fully configured (shares and password) — deferred until driv
 ```bash
 lsblk
 ```
-
-| Device | Size     | Role              |
-|--------|----------|-------------------|
-| sda    | ~120 GB  | SSD (Ubuntu OS)   |
-| sdb    | ~932 GB  | 1 TB HDD          |
-| sdc    | ~112 GB  | 120 GB HDD        |
+[layout redacted]
 
 **Result:** Confirmed expected layout (OS SSD + two data HDDs).
 
@@ -89,19 +85,20 @@ Mount attempts reported unclean filesystem (Windows hibernation / Fast Startup).
 
 **Troubleshooting / Fix:**
 ```bash
-sudo ntfsfix /dev/sdb2
-sudo umount a mount point          # previous mount was still active
-sudo mount /dev/sdb2 a mount point
+sudo ntfsfix /dev/***
+sudo umount /mnt/***          # previous mount was still active
+sudo mount /dev/*** /mnt/***
 ```
 Same process used for the second drive as needed.  
 Note: the command is `umount` (no “n”).
 
-**Result:** Both data drives mounted and browsable under `a mount point` and `a mount point`.
+**Result:** Both data drives mounted and browsable under `/mnt/***` and `/mnt/***`.
 
 ### Note on remote access
 Remote access setup deferred. Samba not yet configured.
 
 ### End of day
+
 Shut down cleanly:
 ```bash
 sudo shutdown -h now
@@ -110,7 +107,7 @@ sudo shutdown -h now
 Mounts are **not** persistent. They must be remounted after reboot.  
 OS, Netplan config, and drive contents are intact.
 
-**Plan for next session:**
+**Plan for next session(s):**
 - Remount the two HDDs.
 - Finalize remote access setup.
 - Configure Samba for easy access from other devices / iPhone Files app.
@@ -119,7 +116,39 @@ OS, Netplan config, and drive contents are intact.
 
 ---
 
-##
+## 2026-10-23 follow-up: Why the NAS was built in stages
+- **What happened:** I installed Ubuntu Server without a working network connection, so SSH wasn't set up during the install. Networking got fixed the next day (the missing DHCP setting in Netplan).
+- **SSH:** I held off on remote login until the network was sorted. When I did set it up, I went straight to key-based login instead of passwords.
+- **Lesson:** Building in stages is fine as long as each stage ends in a safe state. Deferring remote access was safer than opening it up just to get it working.
+
+---
+
+## Oct 24 - Samba shares and remote access testing
+- **Goal:** Get the old data drives reachable over the network and check remote access.
+- **Samba:** Set up file shares for both data drives. Tested from my phone's Files app and from my desktop. Shares first showed up empty because the drives weren't mounted; mounting them fixed it. Mounts still weren't persistent across reboots.
+- **Remote access:** Checked the SSH config and found a drop-in file overriding the defaults. SSH was socket-activated, so the service shows as inactive until a connection comes in, which is normal. Held off on finishing remote login setup.
+- **Result:** Network file access worked. I was able to organize files on the server straight from my desktop.
+- **Lesson:** An empty share usually means the drive underneath isn't mounted, not a Samba problem. Check the effective SSH config (`sshd -T`), not just the main config file, since drop-ins can override it.
+- **Next:** Make mounts persistent, finish remote access setup.
+
+---
+
+## 2026-10-30: Lyonheart's first blue screen (LiveKernelEvent 144)
+- **What happened:** Lyonheart (Windows) restarted on its own while idle, with only background apps running. It was the first crash this PC had ever had.
+- **Investigation:** Opened Reliability Monitor (`perfmon /rel`). It showed a "Windows was not properly shut down" entry, a hardware error logged as LiveKernelEvent 144 (normally a USB fault), a failed Windows/Microsoft Store update, and a failed Xbox Service install at the same moment as the crash.
+- **Diagnosis:** Researched it and found that a failed update or service install like this can trigger the 144 USB code even when the USB hardware is fine. Looked into the failed update and traced it to the Xbox app and Gaming Services.
+- **Fix:** Uninstalled the Xbox app because I don't need it right now. I could have repaired the update instead, but I chose to remove the app. Reinstall it if I want Game Pass later.
+- **Lesson:** Check Reliability Monitor before blaming hardware. Line up the timestamps: an update or install failing at the same moment usually explains the crash better than the stop code alone.
+- **Lesson 2:** Write down what the hardware was doing right before the crash. Mine was idle, which pointed away from heavy-load causes like a GPU under stress. An idle crash still leaves the usual suspects open (an aging PSU, a driver, unstable RAM at XMP/EXPO speed), so ruling things in and out by load state narrows the search.
+
+---
+
+## Nov 2 - Security review before going public
+- **What happened:** Before making this repo public, I had an AI agent review it for sensitive information I'd accidentally exposed in my own write-ups.
+- **What it found:** My early logs included details that map out my setup: system hostnames, network interface names, config file paths, mount points, drive layouts, and notes on which security features I'd skipped or deferred. None of it was a password, but together it gives an attacker a head start.
+- **What I did:** Reworded those entries to describe what I did without the exact details, and planned a history rewrite so the old versions don't stay in past commits.
+- **Lesson:** Log the problem, the fix, and the lesson, not the exact config. Write every entry as if it's already public. Deferred security steps especially shouldn't be announced.
+- **Takeaway:** AI is useful as a second set of eyes. I still make the calls and the changes myself, but the audit caught things I'd stopped noticing. My rule going forward: keep things local where I can and don't hand real configs to AI, but for something that's going public anyway, a review is far less risky than not knowing what I exposed.
 
 ---
 -END LOG-
