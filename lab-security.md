@@ -13,13 +13,31 @@ This page stays high-level on purpose. It describes the approach and why, not th
 
 ## Status
 | Area | Status |
-|-----------------------------|----------------------------|
-| Firewall                    | Planned                    |
-| Network segmentation        | Planned                    |
-| Remote access               | Planned, comparing options |
-| Hardware security keys      | Planned                    |
-| Backups                     | In progress                |
-| Patching and security watch | Active                     |
+|-----------------------------|-------------|
+| Firewall                    | Planned     |
+| Network segmentation        | Planned     |
+| Remote access               | Planned     |
+| Hardware security keys      | Planned     |
+| Backups                     | In progress |
+| Patching and security watch | Active      |
 
 ## Lab experiments
 The lab exists to learn, so some machines (like the temporary NAS) make deliberate trade-offs that a permanent build won't. Those get fixed before anything holds real data or faces the internet.
+
+### Planned networking and security lab
+
+Inspired by CyberFlow’s [The FUN Way to Learn Networking](https://youtu.be/saSPsB-Afuw), I plan to use a small virtual lab for hands-on networking and security practice: configuring services, inspecting traffic, troubleshooting mistakes, and documenting what I learn.
+
+Tools and resources to explore:
+- Wireshark — packet capture and traffic analysis.
+- Nmap — host discovery and service scanning.
+- Scapy — packet structure and controlled packet crafting.
+- Burp Suite and mitmproxy — inspecting test web traffic.
+- VirtualBox — a possible platform for practice VMs.
+- Metasploitable — an intentionally vulnerable practice target.
+- TryHackMe and Root-Me — guided security exercises.
+- Pi-hole and PiVPN — learning DNS filtering and VPN concepts.
+
+Testing will stay within my own or explicitly authorized systems. Intentionally vulnerable targets will use an isolated virtual network, without bridged networking or internet exposure.
+
+These are planned learning resources, not installed services or a commitment to deploy everything. AdGuard Home remains Starrlight’s chosen DNS-filtering service; the learning examples do not change the infrastructure plan.

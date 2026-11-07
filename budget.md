@@ -14,9 +14,8 @@ Sections note the source where relevant.
 ## Server (Sovereign) — full planned build
 
 
-| Item | Part | Cost | Note
-
-|--------------|----------------------------------------------------------|---------|
+| Item | Part | Cost | Note |
+|---|---|---|---|
 | CPU          | AMD Ryzen 9 5900X                                        | $150    | secured private sale when i'm able
 | CPU Cooler   | Thermalright Peerless Assassin 120 SE                    | $34.90  |
 | Motherboard  | ASRock B550 PG Riptide (ATX)                             | $89.99  |
@@ -25,7 +24,7 @@ Sections note the source where relevant.
 | Power Supply | ASRock PRO-650G 650 W 80+ Gold                           | $44.99  | may need to change to have extra cpu connector in case i upgrade
 | Storage      | WD SN850X 1 TB (moving from my PS5)                      | $0      |
 
-| **Parts subtotal** | | **$428.83 pre-tax** | | **$578.83 w/cpu** |
+| **Parts subtotal** | | **$428.83 pre-tax** | **$578.83 w/cpu** |
 
 - RAM prices keep moving, so the exact kit will likely change. Target about $210, budget range $210-250. Spare room in this budget absorbs RAM swings.
 
@@ -58,17 +57,19 @@ Used SAS array to bridge until IronWolf (or equivalent NAS-class) pricing improv
 
 ## Media PC (Warspite)
 
-- Micro Center bundle (CPU + board + 16 GB RAM): Ryzen 5 5600X3D + Gigabyte B550M DS3H AC R2 + G.Skill Ripjaws V 16 GB DDR4-3200 — $300
+- CPU: Ryzen 7 8700F — $0 additional cost (gift, received November 7).
+- Motherboard: AM5 — $0 additional cost (gift, received November 7).
+- GPU: GTX 1080 — $0 additional cost (already owned).
+- RAM: 16 GB DDR5 — still needed; kit and cost TBD, budgeting no more than ~$220.
 - CPU Cooler: Thermalright Assassin X 120 Refined SE — $17.98
 - Power Supply: ASRock PRO-650G 650 W 80+ Gold (or equivalent Gold-rated) — ~$50
 - Case: Lian Li A3 mATX (or similar) — $70–80
 - OS drive: 500 GB SATA SSD (WD Blue or equivalent) — ~$40–50
 - Additional storage (goal, not needed to start): Kingston NV3 1 TB M.2 NVMe — ~$150
-- Internal optical: ASUS BW-16D1HT (or LG WH16NS40) — M-DISC + BDXL, UHD-capable after LibreDrive — ~200 (will settle for regular bd writer to start).  
-  Optional USB enclosure if needed later — ~$15–25
+- Optical: external USB Blu-ray burner — model and cost TBD; regular Blu-ray writing is sufficient to start.
 
-**Rough total (new parts):** ~$630–650  
-Exact pricing varies by vendor and whether the NVMe/ uhd writer is added immediately.
+**Rough total (new parts):** $368 to start - ~$650-$750 total planned build.
+**Remaining-cost total:** TBD once DDR5 RAM, and the external burner are settled. Gifted and already-owned parts above require no additional spending.
 
 ## AI server (Argus)
 

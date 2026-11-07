@@ -1,5 +1,5 @@
 # Parts
-Last updated: 2026-10-30
+Last updated: 2026-11-07
 
 | Part | Current location | Destination | Notes |
 |---------------------------------|-----------|-----------|---------------------------------------|
@@ -24,3 +24,5 @@ Last updated: 2026-10-30
 | CyberPower 1000 VA UPS          | To buy    | Kraken    | Temporary lab UPS                     |
 | ARRIS SB8200 modem, Archer AX55 | To buy    | Kraken    | Modem bridge mode, AP-only            |
 | External UHD burner             | To buy    | Warspite  | |
+| AMD Ryzen 7 8700F | On hand | Warspite | Gift; received 2026-11-07 |
+| AM5 motherboard | On hand | Warspite | Gift; received 2026-11-07; model to record |

@@ -123,7 +123,7 @@ OS, Netplan config, and drive contents are intact.
 
 ---
 
-## Oct 24 - Samba shares and remote access testing
+## 2026-10-24 - Samba shares and remote access testing
 - **Goal:** Get the old data drives reachable over the network and check remote access.
 - **Samba:** Set up file shares for both data drives. Tested from my phone's Files app and from my desktop. Shares first showed up empty because the drives weren't mounted; mounting them fixed it. Mounts still weren't persistent across reboots.
 - **Remote access:** Checked the SSH config and found a drop-in file overriding the defaults. SSH was socket-activated, so the service shows as inactive until a connection comes in, which is normal. Held off on finishing remote login setup.
@@ -133,6 +133,24 @@ OS, Netplan config, and drive contents are intact.
 
 ---
 
+## 2026-10-27: Hoshiryū GPU swap and Bazzite rebase
+*Retrospective entry written November 7, 2026.*
+
+### Change and reasoning
+I replaced the temporary GTX 1080 with a PowerColor Hellhound RX 6650 XT. The GTX 1080 made the initial build possible, but the legacy NVIDIA setup kept this console-style PC on Bazzite’s desktop experience rather than the gaming-mode setup she wanted.
+
+With the AMD card installed, I rebased to the `bazzite-deck` image rather than reinstalling the operating system. The swap and rebase completed without troubleshooting. 
+
+### Learning
+A GPU change can affect the operating-system image and available desktop/gaming experience, not just graphics performance. Rebasing provided a path to the intended setup without starting over.
+
+### Planned follow-up: fan-curve tuning
+I plan to test custom GPU fan curves to improve cooling and, where temperature limits performance, sustain higher clocks. I will compare GPU and hotspot temperatures, sustained clocks, and noise under comparable loads before and after changes.
+
+
+Fan-curve tuning is planned, not completed.
+
+---
 ## 2026-10-30: Lyonheart's first blue screen (LiveKernelEvent 144)
 - **What happened:** Lyonheart (Windows) restarted on its own while idle, with only background apps running. It was the first crash this PC had ever had.
 - **Investigation:** Opened Reliability Monitor (`perfmon /rel`). It showed a "Windows was not properly shut down" entry, a hardware error logged as LiveKernelEvent 144 (normally a USB fault), a failed Windows/Microsoft Store update, and a failed Xbox Service install at the same moment as the crash.
@@ -151,5 +169,23 @@ OS, Netplan config, and drive contents are intact.
 - **Takeaway:** AI is useful as a second set of eyes. I still make the calls and the changes myself, but the audit caught things I'd stopped noticing. My rule going forward: keep things local where I can and don't hand real configs to AI, but for something that's going public anyway, a review is far less risky than not knowing what I exposed.
 
 ---
+
+## 2026-11-07 — Checking an older iPad before dashboard reuse
+*Retrospective on the November 2 security review.*
+
+**Plan:** Reuse an older iPad as a Homarr dashboard client.
+
+**What I learned:** The security review flagged CVE-2026-86950, a CoreGraphics vulnerability involving malicious files. Apple lists fixes in releases this older hardware cannot install, with no listed fix for its legacy branches. That is different from saying it cannot receive any security updates.
+
+**Response:** Keep the intended role narrow, without personal accounts or general browsing, and isolate it from trusted devices. Dashboard configuration is still planned, not completed.
+
+**Wider lesson:** This reminded me that smart devices should be migrated to, or kept on, the guest network with appropriate separation from trusted PCs. It is a design requirement, not a statement that the migration is complete.
+
+**Takeaway:** Check support and vulnerability coverage before repurposing old hardware. A lightweight dashboard role does not remove an operating-system vulnerability; isolation reduces exposure rather than repairing it.
+
+Source: [Apple security advisory](https://support.apple.com/en-us/149225).
+
+---
+
 -END LOG-
 

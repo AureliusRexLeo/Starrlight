@@ -21,8 +21,8 @@ A Steam Machine-style console PC for wife.
 - 2026-10-18: Built around a donated GTX 1080. SteamOS wouldn't work with the NVIDIA card, so I went with Bazzite. The NVIDIA Deck image didn't work either, so it ran desktop mode. Stable the whole time; the 1080 just couldn't do 4K60.
 - 2026-10-27: Swapped the GTX 1080 for an RX 6650 XT and rebased to the bazzite-deck image. No reinstall needed; the rebase kept home, Flatpaks, Steam library, and settings. The 1080 goes to Warspite.
 - 2026-10-30: BIOS settings confirmed (Resizable BAR on, Secure Boot off).
+- 2026-11-07: Updated Bazzite and enabled Secure Boot. Next: tune GPU fan curves so fans ramp up sooner, aiming for lower temperatures and better sustained performance. Removed secure boot from to do. 
 
 ## To do
 - EmuDeck: copy the rest of the ROMs, re-configure for Game Mode and the new card, re-run Steam ROM Manager.
 - Galaxy-colors RGB mode and fan curves.
-- Optional: turn Secure Boot back on after enrolling the Bazzite key.

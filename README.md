@@ -30,6 +30,7 @@ Every change gets tested in an isolated lab VLAN first and has a rollback path (
 | Kraken    | Locally managed network: MikroTik switch, UPS, own modem and AP    | Planned | [network-kraken.md](network-kraken.md)              |
 | LyonHeart | My main PC: gaming, editing, local AI                              | Running | [pc-lyonheart.md](pc-lyonheart.md)                  |
 | Hoshiryū  | Wife's PC (console-style)                                          | Running | [pc-hoshiryu.md](pc-hoshiryu.md)                    |
+| iPad | Homarr dashboard client | Planned; setup incomplete | [ipad.md](ipad.md) |
 
 ## Other pages
 | Page | What's in it |
