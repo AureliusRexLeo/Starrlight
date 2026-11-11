@@ -204,6 +204,70 @@ OS, Netplan config, and drive contents are intact.
 
 ---
 
+### 2026-11-11 — Leviathan first update, drive triage, key-only SSH, Samba rebuild
+
+#### Summary
+Leviathan, the Starrlight NAS (Ubuntu 26.04 for now; Unraid long-term), got its first full update since setup. Along the way, one data drive turned out to be dead and was retired, the remaining data drives were set to mount automatically at boot, SSH was locked down to key-only logins, and the Samba shares were rebuilt around a non-admin share account.
+
+#### 1. Patching
+- Ran a full upgrade: 47 packages, then a reboot.
+- Kernel is now `7.0.0-43-generic`, which fixes **CVE-2026-98432** (IPv4 TCP use-after-free, remote root).
+- APT is now `3.2.1ubuntu0.1`, which fixes **CVE-2026-109518**. (`apt --version` hides the package suffix; `dpkg -s apt | grep Version` shows it.)
+- Automatic security updates (unattended-upgrades) confirmed on.
+- The security gate on the kernel CVE is cleared for Leviathan. It stays LAN-only with no port forwards; other Linux boxes still need their own check.
+
+#### 2. Drive Health
+SMART checks don't need a drive to be mounted, so every drive was checked straight from the device list.
+
+| Drive | Role | Result |
+|---|---|---|
+| Boot SSD | OS | About 30% life left, 0 reallocated sectors. Worn but healthy. |
+| 1 TB Seagate 3.5" | Media | Good. |
+| 500 GB WD 2.5" | Files | Good. |
+| 500 GB Seagate 3.5" | — | **Failed. Retired.** |
+
+The failed Seagate spun up but never identified itself to the system. The kernel log showed the link coming up but an unknown device class and failed resets. The fault followed the drive across a new data cable, a different SATA port, and different power, which points to the drive's own controller. It was removed from the build.
+
+#### 3. Unexpected Lockup
+After the side panel went back on, the keyboard stopped responding and the power button wouldn't shut the system down, so it was powered off at the PSU switch. On the next boots the keyboard was dead at the BIOS screen. With the case opened, cables reseated, and the failed drive removed, the board showed the AMI "press F1 to recover" prompt and booted normally from the SSD via the boot menu. Likely cause: a loose connection. It hasn't repeated, so it's being watched rather than fixed.
+
+#### 4. Formatting and Automount
+- The WD drive still carried an old NTFS signature. It was wiped and formatted ext4 with the label `files`.
+- Both data drives are in `/etc/fstab` with the `nofail` option, so a dead or missing drive won't stop Leviathan from booting.
+- The WD is mounted by its label instead of its UUID, which is easier to read and type.
+
+#### 5. Key-Only SSH
+- A check with `sudo sshd -T | grep -i passwordauthentication` showed password logins were still allowed.
+- An ed25519 key was generated on LyonHeart (the main PC), copied to Leviathan, and tested before anything was turned off.
+- Password and keyboard-interactive logins were then disabled in a drop-in file under `/etc/ssh/sshd_config.d/`. The `00-` prefix makes it load first, so it overrides any later file that turns passwords back on.
+- Config checked with `sshd -t`, SSH reloaded, a second login tested while the first session stayed open, and `sshd -T` now reports `passwordauthentication no`.
+- New devices get access by having their public key added from a device that already works. The local keyboard and monitor remain the fallback.
+
+#### 6. Samba Rebuild
+- The old config shared a drive that no longer existed and didn't share the WD at all. It also forced every file to be owned by the admin account.
+- New setup:
+  - A `nas` group and a dedicated share-only account with no shell login and no home folder.
+  - The admin account is in the group but isn't used for shares, in line with the plan to not use the admin account day to day.
+  - Two shares, `media` (1 TB) and `files` (WD), limited to the `nas` group, no guest access.
+  - Folders use setgid permissions (`2775`) with `force group = nas`, so new files stay group-owned. A future service account for the media stack only needs to join the `nas` group.
+- LyonHeart connects to both shares.
+
+#### 7. Lessons Learned
+- Check every character in a config file, especially the file name. A file that doesn't end in exactly `.conf` gets silently ignored.
+- A terminal that seems frozen is usually waiting at a prompt.
+- Test key-based login *before* turning off password logins.
+- `nofail` in fstab keeps one bad drive from taking the whole box down at boot.
+- A fault that follows a drive across cables, ports, and power is the drive, not the system.
+
+#### 8. Still Open
+- Back up `/etc` (system config) to the 1 TB drive.
+- Router DHCP reservation so Leviathan's address doesn't change.
+- Replacement boot SSD on the parts list, plus a weekly check on SSD wear.
+- Service account for the media stack, when the stack goes up.
+- Optional: test the failed Seagate in another PC to confirm.
+
+---
+
 ## Security and devices
 
 ### 2026-11-02 — Security review before going public
