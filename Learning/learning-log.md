@@ -268,6 +268,37 @@ After the side panel went back on, the keyboard stopped responding and the power
 
 ---
 
+### 2026-11-13 — Leviathan: config backup, mount fix, and clock fix
+
+#### Summary
+A short maintenance session on Leviathan, done from LyonHeart (the main PC) over SSH. Security updates were confirmed current, the system config was backed up before anything changed, an old mount entry was fixed, and the server clock was set to local time.
+
+#### 1. Security Updates
+- Confirmed the latest security updates from recent advisories were already installed. Nothing new to apply.
+
+#### 2. Back Up First
+- Before touching any config, I backed up the whole system configuration folder (`/etc`) into a compressed archive.
+- **Where it went, and why:** the archive went to the Linux-formatted (ext4) data drive, not the NTFS media drive. The config holds sensitive system files, and ext4 enforces Linux file permissions, so the archive can be locked to root-only. An NTFS drive mounted for easy sharing doesn't give that protection.
+- Locked it down with `chmod 600` and confirmed the permissions.
+- `tar` printed "Removing leading `/` from member names." That's normal: it stores paths without the leading slash, so restoring the archive later can't overwrite the live system by accident.
+
+#### 3. The Mount Fix
+- Reviewing `/etc/fstab` turned up one data drive still listed by its device name (`/dev/sdX`) instead of a permanent ID, plus a typo in its options and a duplicated option.
+- **Why it matters:** Linux assigns device names in the order it finds drives at boot. Add or remove a drive and the names can shuffle, so the wrong drive (or no drive) gets mounted.
+- **Fix:** replaced the line with one that uses the drive's UUID, a permanent ID that never changes, and corrected the options.
+- **Tested without rebooting:** `sudo systemctl daemon-reload && sudo mount -a`, then confirmed the files were there.
+- **Backed up again** after the fix, then confirmed the new backup so it includes the corrected config.
+
+#### 4. Clock Fix
+- File timestamps showed the server was running on UTC instead of local time. Set it to local time with `timedatectl` so logs and file times line up with when things actually happened.
+
+#### Lessons Learned
+- **Check what's there before changing it, and back up first.** Reading the existing config is how the typo turned up at all.
+- **Double- and triple-check every typed line.** The typo reinforces my rule. It worked anyway, for now, but "works for now" isn't the standard. Going line by line has to become a habit.
+- **Windows habits don't carry over.** Working from the main PC, right-click paste into the terminal is a big time saver, but it also tempts Windows reflexes. In `nano`, I highlighted a line and hit Delete, and then reflexively hit Ctrl+Z, which *suspends* nano instead of undoing. The fixes: `fg` brings nano back, Alt+U is undo, Ctrl+K cuts a whole line, and Ctrl+X then N exits without saving anything. Nothing was harmed because nano doesn't save until you tell it to, but I'm studying up on nano's commands.
+
+---
+
 ## Security and devices
 
 ### 2026-11-02 — Security review before going public
@@ -293,6 +324,39 @@ After the side panel went back on, the keyboard stopped responding and the power
 **Takeaway:** Check support and vulnerability coverage before repurposing old hardware. A lightweight dashboard role does not remove an operating-system vulnerability; isolation reduces exposure rather than repairing it.
 
 Source: [Apple security advisory](https://support.apple.com/en-us/149225).
+
+---
+
+## Network
+
+### 2026-11-12 — ISP gateway: factory reset and rebuild
+
+#### Summary
+The ISP-provided gateway stopped accepting my admin login, even though the network itself (including the guest network) kept working. Instead of fighting it, I factory-reset the gateway and rebuilt it from my own notes. No call to ISP support was needed.
+
+#### 1. The Problem
+- The admin page rejected the login that had been working.
+- Everything else was fine: devices stayed online, and the guest network was still up.
+- With no way into the settings, there was no way to confirm the security settings were still in place.
+
+#### 2. The Decision
+A factory reset wipes everything back to defaults, which sounds worse than it is when the setup is documented. My notes already listed every setting I'd changed and why, so a reset was the fastest path back to a known-good, verified configuration.
+
+#### 3. The Rebuild
+- **Admin access:** set a new, strong admin login right away, before anything else.
+- **Guest network:** brought it back for untrusted devices, with the same name and password so those devices reconnected without being touched.
+- **Security settings:** reapplied them and confirmed each one saved, including remote management staying off.
+- **Fixed addresses:** gave the main PC and the NAS DHCP reservations, so they always get the same address on the network. 
+
+#### 4. Verification
+- The file shares between the main PC and the NAS came back on their own, because the NAS kept the same address.
+- The gateway now shows the NAS with a fixed address.
+
+#### 5. Why This Matters for the Lab
+Fixed addresses are the groundwork for what comes next: the *arr stack, Nextcloud, and later the firewall and VPN. Nothing is exposed to the internet: no open ports, and remote access will only come through a VPN once the firewall is in place.
+
+#### Lesson Learned
+My organized documentation and checklists turned what could have been a daunting reset into a 10-minute redo. It reinforces documenting every setting you change, and why, while you're changing it.
 
 ---
 

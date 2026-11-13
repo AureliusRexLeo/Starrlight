@@ -32,10 +32,12 @@ Leviathan holds the primary copy in my 3-2-1 backup plan: per-person media share
 - 2026-10-25: Remounted with client-friendly permissions, sorted files from Windows over the network, cleared Windows-locked folders from the server side. Made the media drive mount at boot with `nofail`. Retired the old 120 GB HDD and physically destroyed it (drilled, then saltwater). Thats the standard for any retired drive.
 - Later: moved SSH to key-based login.
 - 2026-10-28: 500 GB #1 installed. 500 GB #2 placed but left unpowered. Picked the Thermaltake GF1 850W as the new targeted PSU.
+- 2026-11-13: Backed up the system config to the ext4 drive (root-only), switched the media drive's mount entry to a stable UUID, and set the clock to local time. Details in the [learning log](Learning/learning-log.md)
 
 ## Next
-1. Confirm mounts, then back up the OS/config files first.
-2. Health-check (SMART) every drive.
-3. Switch the fstab entry to a UUID so adding drives can't reshuffle names.
-4. Configure shares and permissions, then set up Nextcloud.
-5. Backups before real use. Permanent spot, then headless operation.
+1. Switch the fstab entry to a UUID so adding drives can't reshuffle names. Files drive needs UUID as well.
+2. Configure shares and permissions, then set up Nextcloud.
+3. retroactively update this log to include steps taken. for full up-to-date log see: learning log. 
+4. 
+5. 
+
